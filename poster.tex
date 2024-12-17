@@ -1,52 +1,54 @@
 \input cgem
 
-%% Layer 0
-\begingroup\color{black}
-	\hrule width \framewidth height \frameheight depth 0pt
-	\vskip -\frameheight
-\endgroup
+\newdimen\blocktop
+\newdimen\blockbottom
+\newdimen\blockleft
+\newdimen\blockright
 
-%% Layer 1
-\newdimen\layeronepad \layeronepad=1cm
-\newdimen\layeronewidth  \layeronewidth=\framewidth
-\newdimen\layeroneheight \layeroneheight=\frameheight
-\advance\layeronewidth by -2\layeronepad
-\advance\layeroneheight by -2\layeronepad
+%% Background
+\blackblock top0pt bottom\frameheight left0pt right\framewidth
 
-\vskip\layeronepad
-\noindent\hskip\layeronepad
-\vbox{\begingroup\color{blue}
-	\hrule width \layeronewidth height \layeroneheight depth 0pt
-\endgroup}
-\vskip\layeronepad
-\vskip -\frameheight
+%% Outer border
+\newdimen\titleheight \titleheight=10cm
+\newdimen\outerbordersize \outerbordersize=1cm
 
-%% Layer 2
-\newdimen\layertwopad \layertwopad=\layeronepad
-\advance\layertwopad by 1cm
-\newdimen\layertwowidth  \layertwowidth=\framewidth
-\newdimen\layertwoheight \layertwoheight=\frameheight
-\advance\layertwowidth by -2\layertwopad
-\advance\layertwoheight by -2\layertwopad
+\blocktop=\titleheight
+\blockbottom=\the\dimexpr\frameheight-1cm\relax
+\blockleft=1cm
+\blockright=\the\dimexpr\blockleft+\outerbordersize\relax
 
-\vskip\layertwopad
-\noindent\hskip\layertwopad
-\vbox{\begingroup\color{black}
-	\hrule width \layertwowidth height \layertwoheight depth 0pt
-\endgroup}
-\vskip\layertwopad
-\vskip -\frameheight
+\moredarkgrayblock top\blocktop bottom\blockbottom left\blockleft right\blockright
+
+\blocktop=\titleheight
+\blockbottom=\the\dimexpr\frameheight-1cm\relax
+\blockright=\the\dimexpr\framewidth-1cm\relax
+\blockleft=\the\dimexpr\blockright-\outerbordersize\relax
+
+\moredarkgrayblock top\blocktop bottom\blockbottom left\blockleft right\blockright
+
+\blockbottom=\the\dimexpr\frameheight-1cm\relax
+\blocktop=\the\dimexpr\blockbottom-\outerbordersize\relax
+\blockleft=1cm
+\blockright=\the\dimexpr\framewidth-1cm\relax
+
+\moredarkgrayblock top\blocktop bottom\blockbottom left\blockleft right\blockright
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Text
+\def\emdash{\char"2014}
+
 \normalsans
 \begingroup\color{white}
 
+\centerline{\largebf An Informative Title}
 \vskip1cm
-\centerline{\largebf Reformulation of Low-Latitude Reduction to Pole with}
-\vskip1cm
-\centerline{\largebf Combined Reductions to Equator}
+\centerline{\largebf With Two Lines!}
+\vskip1.5cm
+\begingroup\color{cgemblue}
+	\centerline{\tinyit R~Nate~Crummett \emdash\ Mengli~Zhang \emdash\ Yaoguo~Li}
+\endgroup
 
+\vfill
 \endgroup % white
 \end

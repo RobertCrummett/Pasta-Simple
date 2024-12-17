@@ -12,22 +12,7 @@
 \voffset -1in
 \hoffset -1in
 
-%% Numbers
-\def\pagenumber{
-	\hfill
-	\begingroup\color{cgemblue} \smallsans \folio \endgroup
-	\hskip 3mm \vskip 6mm
-}
-
-
 %% Colors
-\def\backgroundcolor#1{%
-	\begingroup\color{#1}%
-		\hrule width \framewidth height \frameheight depth 0pt%
-		\vskip -\frameheight
-	\endgroup
-}
-
 \newif\ifpdfmode
 
 \begingroup\expandafter\expandafter\expandafter\endgroup
@@ -86,12 +71,48 @@
 	\fi
 }
 
-\edef\colorred  {\ifpdfmode 1 0 0 rg 1 0 0 RG \else rgb 1 0 0 \fi}
-\edef\colorgreen{\ifpdfmode 0 1 0 rg 0 1 0 RG \else rgb 0 1 0 \fi}
-\edef\colorblue {\ifpdfmode 0 0 1 rg 0 0 1 RG \else rgb 0 0 1 \fi}
-\edef\colorcgemblue{\ifpdfmode 0.56470 0.77255 0.98431 rg 0.56470 0.77255 0.98431 RG \else rgb 0.56470 0.77255 0.98431 \fi}
-\edef\colorblack{\ifpdfmode 0 0 0 rg 0 0 0 RG \else rgb 0 0 0 \fi}
-\edef\colorwhite{\ifpdfmode 1 1 1 rg 1 1 1 RG \else rgb 1 1 1 \fi}
+\edef\colorred   {\ifpdfmode 1 0 0 rg 1 0 0 RG \else rgb 1 0 0 \fi}
+\edef\colorgreen {\ifpdfmode 0 1 0 rg 0 1 0 RG \else rgb 0 1 0 \fi}
+\edef\colorblue  {\ifpdfmode 0 0 1 rg 0 0 1 RG \else rgb 0 0 1 \fi}
+\edef\colorcgemblue {\ifpdfmode 0.56470 0.77255 0.98431 rg 0.56470 0.77255 0.98431 RG \else rgb 0.56470 0.77255 0.98431 \fi}
+\edef\colorblack         {\ifpdfmode 0   g 0   G \else gray 0   \fi}
+\edef\colorverydarkgray  {\ifpdfmode 0.1 g 0.1 G \else gray 0.1 \fi}
+\edef\colormoredarkgray  {\ifpdfmode 0.2 g 0.2 G \else gray 0.2 \fi}
+\edef\colordarkgray      {\ifpdfmode 0.3 g 0.3 G \else gray 0.3 \fi}
+\edef\colorgray          {\ifpdfmode 0.5 g 0.5 G \else gray 0.5 \fi}
+\edef\colorlightgray     {\ifpdfmode 0.7 g 0.7 G \else gray 0.7 \fi}
+\edef\colorverylightgray {\ifpdfmode 0.9 g 0.9 G \else gray 0.9 \fi}
+\edef\colorwhite         {\ifpdfmode 1   g 1   G \else gray 1   \fi}
+
+%% Blocks
+\newdimen\blockheight
+\newdimen\blockwidth
+
+\def\block color#1top#2bottom#3left#4right#5{
+	\blockheight=\the\dimexpr#3-#2\relax
+	\blockwidth=\the\dimexpr#5-#4\relax
+	\vskip#2
+	\noindent\hskip#4
+	\vbox{\begingroup\color{#1}
+		\hrule width\blockwidth height\blockheight depth0pt
+	\endgroup}
+	\vskip-\blockheight
+	\vskip-\blocktop
+}
+
+\def\redblock top#1bottom#2left#3right#4      {\block color{red}top#1bottom#2left#3right#4}
+\def\greenblock top#1bottom#2left#3right#4    {\block color{green}top#1bottom#2left#3right#4}
+\def\blueblock top#1bottom#2left#3right#4     {\block color{blue}top#1bottom#2left#3right#4}
+\def\cgemblueblock top#1bottom#2left#3right#4 {\block color{cgemblue}top#1bottom#2left#3right#4}
+
+\def\whiteblock         top#1bottom#2left#3right#4{\block color{white}top#1bottom#2left#3right#4}
+\def\verydarkgrayblock  top#1bottom#2left#3right#4{\block color{verydarkgray}top#1bottom#2left#3right#4}
+\def\moredarkgrayblock  top#1bottom#2left#3right#4{\block color{moredarkgray}top#1bottom#2left#3right#4}
+\def\darkgrayblock      top#1bottom#2left#3right#4{\block color{darkgray}top#1bottom#2left#3right#4}
+\def\grayblock          top#1bottom#2left#3right#4{\block color{gray}top#1bottom#2left#3right#4}
+\def\lightgrayblock     top#1bottom#2left#3right#4{\block color{lightgray}top#1bottom#2left#3right#4}
+\def\verylightgrayblock top#1bottom#2left#3right#4{\block color{verylightgray}top#1bottom#2left#3right#4}
+\def\blackblock         top#1bottom#2left#3right#4{\block color{black}top#1bottom#2left#3right#4}
 
 %% Fonts
 \newdimen\giantfont  \giantfont=208pt
