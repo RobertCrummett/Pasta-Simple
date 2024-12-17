@@ -1,0 +1,224 @@
+%% CGEM Poster %%
+%% Contact: R Nate Crummett, 2024
+
+%% Frame Dimensions
+\newdimen\frameheight \frameheight=48in
+\newdimen\framewidth  \framewidth=72in
+
+\pdfpageheight \frameheight
+\pdfpagewidth \framewidth
+\vsize \frameheight
+\hsize \framewidth
+\voffset -1in
+\hoffset -1in
+
+%% Numbers
+\def\pagenumber{
+	\hfill
+	\begingroup\color{cgemblue} \smallsans \folio \endgroup
+	\hskip 3mm \vskip 6mm
+}
+
+
+%% Colors
+\def\backgroundcolor#1{%
+	\begingroup\color{#1}%
+		\hrule width \framewidth height \frameheight depth 0pt%
+		\vskip -\frameheight
+	\endgroup
+}
+
+\newif\ifpdfmode
+
+\begingroup\expandafter\expandafter\expandafter\endgroup
+\expandafter\ifx\csname pdfoutput\endcsname\relax
+\else
+	\ifnum\pdfoutput>0 %
+		\expandafter\expandafter\expandafter\pdfmodetrue
+	\fi
+\fi
+
+\edef\currentcolor{%
+	\ifpdfmode
+		0 g 0 G%
+	\else
+		gray 0%
+	\fi
+}
+
+\begingroup\expandafter\expandafter\expandafter\endgroup
+\expandafter\ifx\csname pdfcolorstack\endcsname\relax
+	\ifpdfmode
+		\def\pdfcolorstackpush{\pdfliteral{\currentcolor}}%
+		\let\pdfcolorstackpop\pdfcolorstackpush
+	\fi
+\else
+	\chardef\colorstack=0 %
+	\def\pdfcolorstackpush{%
+		\pdfcolorstack\colorstackcnt push{\currentcolor}%
+	}%
+	\def\pdfcolorstackpop{%
+		\pdfcolorstack\colorstackcnt pop\relax%
+	}%
+\fi
+
+\edef\color#1{%
+	\begingroup\noexpand\expandafter\noexpand\expandafter\noexpand\expandafter\endgroup
+	\noexpand\expandafter\noexpand\ifx\noexpand\csname color#1\noexpand\endcsname\relax
+		\def\noexpand\currentcolor{#1}%
+	\noexpand\else
+		\noexpand\expandafter\let\noexpand\expandafter\noexpand\currentcolor
+		\noexpand\csname color#1\noexpand\endcsname
+	\noexpand\fi
+	\ifpdfmode
+		\noexpand\pdfcolorstackpush
+	\else
+		\special{color push \noexpand\currentcolor}%
+	\fi
+	\aftergroup\noexpand\resetcolor
+}
+
+\edef\resetcolor{%
+	\ifpdfmode
+		\noexpand\pdfcolorstackpop
+	\else
+		\special{color pop}
+	\fi
+}
+
+\edef\colorred  {\ifpdfmode 1 0 0 rg 1 0 0 RG \else rgb 1 0 0 \fi}
+\edef\colorgreen{\ifpdfmode 0 1 0 rg 0 1 0 RG \else rgb 0 1 0 \fi}
+\edef\colorblue {\ifpdfmode 0 0 1 rg 0 0 1 RG \else rgb 0 0 1 \fi}
+\edef\colorcgemblue{\ifpdfmode 0.56470 0.77255 0.98431 rg 0.56470 0.77255 0.98431 RG \else rgb 0.56470 0.77255 0.98431 \fi}
+\edef\colorblack{\ifpdfmode 0 0 0 rg 0 0 0 RG \else rgb 0 0 0 \fi}
+\edef\colorwhite{\ifpdfmode 1 1 1 rg 1 1 1 RG \else rgb 1 1 1 \fi}
+
+%% Fonts
+\newdimen\giantfont  \giantfont=208pt
+\newdimen\hugefont   \hugefont=172pt
+\newdimen\largefont  \largefont=144pt
+\newdimen\normalfont \normalfont=128pt
+\newdimen\smallfont  \smallfont=112pt
+\newdimen\tinyfont   \tinyfont=80pt
+
+% Arial Text
+\def\giantsans  {\font\zfontz="Arial" at \giantfont  \zfontz}
+\def\hugesans   {\font\zfontz="Arial" at \hugefont   \zfontz}
+\def\largesans  {\font\zfontz="Arial" at \largefont  \zfontz}
+\def\normalsans {\font\zfontz="Arial" at \normalfont \zfontz}
+\def\smallsans  {\font\zfontz="Arial" at \smallfont  \zfontz}
+\def\tinysans   {\font\zfontz="Arial" at \tinyfont   \zfontz}
+
+% Roman Text (Family 0)
+\def\hugerm   {\font\zfontz="cmr10" at \hugefont   \zfontz}
+\def\largerm  {\font\zfontz="cmr10" at \largefont  \zfontz}
+\def\normalrm {\font\zfontz="cmr10" at \normalfont \zfontz}
+\def\smallrm  {\font\zfontz="cmr10" at \smallfont  \zfontz}
+\def\tinyrm   {\font\zfontz="cmr10" at \tinyfont   \zfontz}
+
+\font\1="cmr10" at \largefont
+\font\2="cmr10" at \normalfont
+\font\3="cmr10" at \smallfont
+\textfont0=\1 \scriptfont0=\2 \scriptscriptfont0=\3
+\def\rm{\fam=0}
+
+% Math Italic (Family 1)
+\def\hugemi   {\font\zfontz="cmmi10" at \hugefont   \zfontz}
+\def\largemi  {\font\zfontz="cmmi10" at \largefont  \zfontz}
+\def\normalmi {\font\zfontz="cmmi10" at \normalfont \zfontz}
+\def\smallmi  {\font\zfontz="cmmi10" at \smallfont  \zfontz}
+\def\tinymi   {\font\zfontz="cmmi10" at \tinyfont   \zfontz}
+
+\font\1="cmmi10" at \largefont
+\font\2="cmmi10" at \normalfont
+\font\3="cmmi10" at \smallfont
+\textfont1=\1 \scriptfont1=\2 \scriptscriptfont1=\3
+\def\mit{\fam=1}
+
+% Math Symbols (Family 2)
+\def\hugesy   {\font\zfontz="cmsy10" at \hugefont   \zfontz}
+\def\largesy  {\font\zfontz="cmsy10" at \largefont  \zfontz}
+\def\normalsy {\font\zfontz="cmsy10" at \normalfont \zfontz}
+\def\smallsy  {\font\zfontz="cmsy10" at \smallfont  \zfontz}
+\def\tinysy   {\font\zfontz="cmsy10" at \tinyfont   \zfontz}
+
+\font\1="cmsy10" at \largefont
+\font\2="cmsy10" at \normalfont
+\font\3="cmsy10" at \smallfont
+\textfont2=\1 \scriptfont2=\2 \scriptscriptfont2=\3
+\def\cal{\fam=2}
+
+% Math Extension (Family 3)
+\def\hugeex   {\font\zfontz="cmex10" at \hugefont   \zfontz}
+\def\largeex  {\font\zfontz="cmex10" at \largefont  \zfontz}
+\def\normalex {\font\zfontz="cmex10" at \normalfont \zfontz}
+\def\smallex  {\font\zfontz="cmex10" at \smallfont  \zfontz}
+\def\tinyex   {\font\zfontz="cmex10" at \tinyfont   \zfontz}
+
+\font\1="cmex10" at \largefont
+\font\2="cmex10" at \normalfont
+\font\3="cmex10" at \smallfont
+\textfont3=\1 \scriptfont3=\2 \scriptscriptfont3=\3
+
+% Italic Text (Family 4)
+\def\giantit  {\font\zfontz="Arial Italic" at \giantfont  \zfontz}
+\def\hugeit   {\font\zfontz="Arial Italic" at \hugefont   \zfontz}
+\def\largeit  {\font\zfontz="Arial Italic" at \largefont  \zfontz}
+\def\normalit {\font\zfontz="Arial Italic" at \normalfont \zfontz}
+\def\smallit  {\font\zfontz="Arial Italic" at \smallfont  \zfontz}
+\def\tinyit   {\font\zfontz="Arial Italic" at \tinyfont   \zfontz}
+
+\font\1="Arial Italic" at \largefont
+\font\2="Arial Italic" at \normalfont
+\font\3="Arial Italic" at \smallfont
+\textfont4=\1 \scriptfont4=\2 \scriptscriptfont4=\3
+\def\it{\fam=4}
+
+% Slanted Text (Family 5)
+\def\giantsl  {\font\zfontz="Arial" at \giantfont  \zfontz}
+\def\hugesl   {\font\zfontz="Arial" at \hugefont   \zfontz}
+\def\largesl  {\font\zfontz="Arial" at \largefont  \zfontz}
+\def\normalsl {\font\zfontz="Arial" at \normalfont \zfontz}
+\def\smallsl  {\font\zfontz="Arial" at \smallfont  \zfontz}
+\def\tinysl   {\font\zfontz="Arial" at \tinyfont   \zfontz}
+
+\font\1="Arial" at \largefont
+\font\2="Arial" at \normalfont
+\font\3="Arial" at \smallfont
+\textfont5=\1 \scriptfont5=\2 \scriptscriptfont5=\3
+\def\sl{\fam=5}
+
+% Boldface Text (Family 6)
+\def\giantbf  {\font\zfontz="Arial Bold" at \giantfont  \zfontz}
+\def\hugebf   {\font\zfontz="Arial Bold" at \hugefont   \zfontz}
+\def\largebf  {\font\zfontz="Arial Bold" at \largefont  \zfontz}
+\def\normalbf {\font\zfontz="Arial Bold" at \normalfont \zfontz}
+\def\smallbf  {\font\zfontz="Arial Bold" at \smallfont  \zfontz}
+\def\tinybf   {\font\zfontz="Arial Bold" at \tinyfont   \zfontz}
+
+\font\1="Arial Bold" at \largefont
+\font\2="Arial Bold" at \normalfont
+\font\3="Arial Bold" at \smallfont
+\textfont6=\1 \scriptfont6=\2 \scriptscriptfont6=\3
+\def\bf{\fam=6}
+
+% Typewriter Text (Family 7)
+\def\hugett   {\font\zfontz="cmtt10" at \hugefont   \zfontz}
+\def\largett  {\font\zfontz="cmtt10" at \largefont  \zfontz}
+\def\normaltt {\font\zfontz="cmtt10" at \normalfont \zfontz}
+\def\smalltt  {\font\zfontz="cmtt10" at \smallfont  \zfontz}
+\def\tinytt   {\font\zfontz="cmtt10" at \tinyfont   \zfontz}
+
+\font\1="cmtt10" at \largefont
+\font\2="cmtt10" at \normalfont
+\font\3="cmtt10" at \smallfont
+\textfont7=\1 \scriptfont7=\2 \scriptscriptfont7=\3
+\def\tt{\fam=7}
+
+% Bold Italic
+\def\giantbfit  {\font\zfontz="Arial Bold Italic" at \giantfont  \zfontz}
+\def\hugebfit   {\font\zfontz="Arial Bold Italic" at \hugefont   \zfontz}
+\def\largebfit  {\font\zfontz="Arial Bold Italic" at \largefont  \zfontz}
+\def\normalbfit {\font\zfontz="Arial Bold Italic" at \normalfont \zfontz}
+\def\smallbfit  {\font\zfontz="Arial Bold Italic" at \smallfont  \zfontz}
+\def\tinybfit   {\font\zfontz="Arial Bold Italic" at \tinyfont   \zfontz}

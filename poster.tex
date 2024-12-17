@@ -1,0 +1,52 @@
+\input cgem
+
+%% Layer 0
+\begingroup\color{black}
+	\hrule width \framewidth height \frameheight depth 0pt
+	\vskip -\frameheight
+\endgroup
+
+%% Layer 1
+\newdimen\layeronepad \layeronepad=1cm
+\newdimen\layeronewidth  \layeronewidth=\framewidth
+\newdimen\layeroneheight \layeroneheight=\frameheight
+\advance\layeronewidth by -2\layeronepad
+\advance\layeroneheight by -2\layeronepad
+
+\vskip\layeronepad
+\noindent\hskip\layeronepad
+\vbox{\begingroup\color{blue}
+	\hrule width \layeronewidth height \layeroneheight depth 0pt
+\endgroup}
+\vskip\layeronepad
+\vskip -\frameheight
+
+%% Layer 2
+\newdimen\layertwopad \layertwopad=\layeronepad
+\advance\layertwopad by 1cm
+\newdimen\layertwowidth  \layertwowidth=\framewidth
+\newdimen\layertwoheight \layertwoheight=\frameheight
+\advance\layertwowidth by -2\layertwopad
+\advance\layertwoheight by -2\layertwopad
+
+\vskip\layertwopad
+\noindent\hskip\layertwopad
+\vbox{\begingroup\color{black}
+	\hrule width \layertwowidth height \layertwoheight depth 0pt
+\endgroup}
+\vskip\layertwopad
+\vskip -\frameheight
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Text
+\normalsans
+\begingroup\color{white}
+
+\vskip1cm
+\centerline{\largebf Reformulation of Low-Latitude Reduction to Pole with}
+\vskip1cm
+\centerline{\largebf Combined Reductions to Equator}
+
+\endgroup % white
+\end
