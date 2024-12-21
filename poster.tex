@@ -1,54 +1,21 @@
 \input cgem
 
-\newdimen\blocktop
-\newdimen\blockbottom
-\newdimen\blockleft
-\newdimen\blockright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Background
-\blackblock top0pt bottom\frameheight left0pt right\framewidth
-
-%% Outer border
-\newdimen\titleheight \titleheight=10cm
-\newdimen\outerbordersize \outerbordersize=1cm
-
-\blocktop=\titleheight
-\blockbottom=\the\dimexpr\frameheight-1cm\relax
-\blockleft=1cm
-\blockright=\the\dimexpr\blockleft+\outerbordersize\relax
-
-\moredarkgrayblock top\blocktop bottom\blockbottom left\blockleft right\blockright
-
-\blocktop=\titleheight
-\blockbottom=\the\dimexpr\frameheight-1cm\relax
-\blockright=\the\dimexpr\framewidth-1cm\relax
-\blockleft=\the\dimexpr\blockright-\outerbordersize\relax
-
-\moredarkgrayblock top\blocktop bottom\blockbottom left\blockleft right\blockright
-
-\blockbottom=\the\dimexpr\frameheight-1cm\relax
-\blocktop=\the\dimexpr\blockbottom-\outerbordersize\relax
-\blockleft=1cm
-\blockright=\the\dimexpr\framewidth-1cm\relax
-
-\moredarkgrayblock top\blocktop bottom\blockbottom left\blockleft right\blockright
+\blackblock{0pt}{\frameheight}{0pt}{\framewidth}
+\redblock{0pt}{\frameheight}{\the\dimexpr\framewidth-10cm\relax}{\framewidth}
+\blueblock{0pt}{\frameheight}{0cm}{10cm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Text
-\def\emdash{\char"2014}
-
 \normalsans
 \begingroup\color{white}
 
 \centerline{\largebf An Informative Title}
 \vskip1cm
 \centerline{\largebf With Two Lines!}
-\vskip1.5cm
-\begingroup\color{cgemblue}
-	\centerline{\tinyit R~Nate~Crummett \emdash\ Mengli~Zhang \emdash\ Yaoguo~Li}
-\endgroup
-
 \vfill
 \endgroup % white
 \end

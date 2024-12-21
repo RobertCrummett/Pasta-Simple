@@ -2,8 +2,8 @@
 %% Contact: R Nate Crummett, 2024
 
 %% Frame Dimensions
-\newdimen\frameheight \frameheight=48in
-\newdimen\framewidth  \framewidth=72in
+\newdimen\frameheight \frameheight=42in % max 42 inches for AME
+\newdimen\framewidth  \framewidth=72in  % max 96 inches for AME
 
 \pdfpageheight \frameheight
 \pdfpagewidth \framewidth
@@ -88,7 +88,7 @@
 \newdimen\blockheight
 \newdimen\blockwidth
 
-\def\block color#1top#2bottom#3left#4right#5{
+\def\block#1#2#3#4#5{
 	\blockheight=\the\dimexpr#3-#2\relax
 	\blockwidth=\the\dimexpr#5-#4\relax
 	\vskip#2
@@ -96,23 +96,23 @@
 	\vbox{\begingroup\color{#1}
 		\hrule width\blockwidth height\blockheight depth0pt
 	\endgroup}
-	\vskip-\blockheight
-	\vskip-\blocktop
+	\vskip\the\dimexpr-\blockheight-#2-1pt\relax
 }
 
-\def\redblock top#1bottom#2left#3right#4      {\block color{red}top#1bottom#2left#3right#4}
-\def\greenblock top#1bottom#2left#3right#4    {\block color{green}top#1bottom#2left#3right#4}
-\def\blueblock top#1bottom#2left#3right#4     {\block color{blue}top#1bottom#2left#3right#4}
-\def\cgemblueblock top#1bottom#2left#3right#4 {\block color{cgemblue}top#1bottom#2left#3right#4}
+\def\blackblock#1#2#3#4{\block{black}{#1}{#2}{#3}{#4}}
+\def\verydarkgrayblock#1#2#3#4{\block{verydarkgray}{#1}{#2}{#3}{#4}}
+\def\moredarkgrayblock#1#2#3#4{\block{moredarkgray}{#1}{#2}{#3}{#4}}
+\def\darkgrayblock#1#2#3#4{\block{darkgray}{#1}{#2}{#3}{#4}}
+\def\grayblock#1#2#3#4{\block{gray}{#1}{#2}{#3}{#4}}
+\def\lightgrayblock#1#2#3#4{\block{lightgray}{#1}{#2}{#3}{#4}}
+\def\verylightgrayblock#1#2#3#4{\block{verylightgray}{#1}{#2}{#3}{#4}}
+\def\whiteblock#1#2#3#4{\block{white}{#1}{#2}{#3}{#4}}
 
-\def\whiteblock         top#1bottom#2left#3right#4{\block color{white}top#1bottom#2left#3right#4}
-\def\verydarkgrayblock  top#1bottom#2left#3right#4{\block color{verydarkgray}top#1bottom#2left#3right#4}
-\def\moredarkgrayblock  top#1bottom#2left#3right#4{\block color{moredarkgray}top#1bottom#2left#3right#4}
-\def\darkgrayblock      top#1bottom#2left#3right#4{\block color{darkgray}top#1bottom#2left#3right#4}
-\def\grayblock          top#1bottom#2left#3right#4{\block color{gray}top#1bottom#2left#3right#4}
-\def\lightgrayblock     top#1bottom#2left#3right#4{\block color{lightgray}top#1bottom#2left#3right#4}
-\def\verylightgrayblock top#1bottom#2left#3right#4{\block color{verylightgray}top#1bottom#2left#3right#4}
-\def\blackblock         top#1bottom#2left#3right#4{\block color{black}top#1bottom#2left#3right#4}
+\def\redblock#1#2#3#4{\block{red}{#1}{#2}{#3}{#4}}
+\def\blueblock#1#2#3#4{\block{blue}{#1}{#2}{#3}{#4}}
+\def\greenblock#1#2#3#4{\block{green}{#1}{#2}{#3}{#4}}
+
+\def\cgemblueblock#1#2#3#4{\block{cgemblue}{#1}{#2}{#3}{#4}}
 
 %% Fonts
 \newdimen\giantfont  \giantfont=208pt
