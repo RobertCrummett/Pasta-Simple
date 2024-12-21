@@ -5,12 +5,12 @@
 \newdimen\frameheight \frameheight=42in % max 42 inches for AME
 \newdimen\framewidth  \framewidth=72in  % max 96 inches for AME
 
-\pdfpageheight \frameheight
-\pdfpagewidth \framewidth
-\vsize \frameheight
-\hsize \framewidth
-\voffset -1in
-\hoffset -1in
+\pdfpageheight\frameheight
+\pdfpagewidth\framewidth
+\vsize\frameheight
+\hsize\framewidth
+\voffset-1in
+\hoffset-1in
 
 %% Colors
 \newif\ifpdfmode
@@ -23,13 +23,7 @@
 	\fi
 \fi
 
-\edef\currentcolor{%
-	\ifpdfmode
-		0 g 0 G%
-	\else
-		gray 0%
-	\fi
-}
+\edef\currentcolor{\ifpdfmode 0 g 0 G \else gray 0 \fi}
 
 \begingroup\expandafter\expandafter\expandafter\endgroup
 \expandafter\ifx\csname pdfcolorstack\endcsname\relax
@@ -71,32 +65,30 @@
 	\fi
 }
 
-\edef\colorred   {\ifpdfmode 1 0 0 rg 1 0 0 RG \else rgb 1 0 0 \fi}
-\edef\colorgreen {\ifpdfmode 0 1 0 rg 0 1 0 RG \else rgb 0 1 0 \fi}
-\edef\colorblue  {\ifpdfmode 0 0 1 rg 0 0 1 RG \else rgb 0 0 1 \fi}
-\edef\colorcgemblue {\ifpdfmode 0.56470 0.77255 0.98431 rg 0.56470 0.77255 0.98431 RG \else rgb 0.56470 0.77255 0.98431 \fi}
-\edef\colorblack         {\ifpdfmode 0   g 0   G \else gray 0   \fi}
-\edef\colorverydarkgray  {\ifpdfmode 0.1 g 0.1 G \else gray 0.1 \fi}
-\edef\colormoredarkgray  {\ifpdfmode 0.2 g 0.2 G \else gray 0.2 \fi}
-\edef\colordarkgray      {\ifpdfmode 0.3 g 0.3 G \else gray 0.3 \fi}
-\edef\colorgray          {\ifpdfmode 0.5 g 0.5 G \else gray 0.5 \fi}
-\edef\colorlightgray     {\ifpdfmode 0.7 g 0.7 G \else gray 0.7 \fi}
-\edef\colorverylightgray {\ifpdfmode 0.9 g 0.9 G \else gray 0.9 \fi}
-\edef\colorwhite         {\ifpdfmode 1   g 1   G \else gray 1   \fi}
+\edef\colorred{\ifpdfmode 1 0 0 rg 1 0 0 RG \else rgb 1 0 0 \fi}
+\edef\colorgreen{\ifpdfmode 0 1 0 rg 0 1 0 RG \else rgb 0 1 0 \fi}
+\edef\colorblue{\ifpdfmode 0 0 1 rg 0 0 1 RG \else rgb 0 0 1 \fi}
+\edef\colorcgemblue{\ifpdfmode 0.56470 0.77255 0.98431 rg 0.56470 0.77255 0.98431 RG \else rgb 0.56470 0.77255 0.98431 \fi}
+\edef\colorblack{\ifpdfmode 0 g 0 G \else gray 0 \fi}
+\edef\colorverydarkgray{\ifpdfmode 0.1 g 0.1 G \else gray 0.1 \fi}
+\edef\colormoredarkgray{\ifpdfmode 0.2 g 0.2 G \else gray 0.2 \fi}
+\edef\colordarkgray{\ifpdfmode 0.3 g 0.3 G \else gray 0.3 \fi}
+\edef\colorgray{\ifpdfmode 0.5 g 0.5 G \else gray 0.5 \fi}
+\edef\colorlightgray{\ifpdfmode 0.7 g 0.7 G \else gray 0.7 \fi}
+\edef\colorverylightgray{\ifpdfmode 0.9 g 0.9 G \else gray 0.9 \fi}
+\edef\colorwhite{\ifpdfmode 1 g 1 G \else gray 1 \fi}
 
 %% Blocks
 \newdimen\blockheight
 \newdimen\blockwidth
 
-\def\block#1#2#3#4#5{
-	\blockheight=\the\dimexpr#3-#2\relax
-	\blockwidth=\the\dimexpr#5-#4\relax
-	\vskip#2
-	\noindent\hskip#4
-	\vbox{\begingroup\color{#1}
-		\hrule width\blockwidth height\blockheight depth0pt
-	\endgroup}
-	\vskip\the\dimexpr-\blockheight-#2-1pt\relax
+\def\block#1#2#3#4#5{%
+	\blockheight=\the\dimexpr#3-#2\relax%
+	\blockwidth=\the\dimexpr#5-#4\relax%
+	\vskip#2%
+	\noindent\hskip#4%
+	\vbox{\begingroup\color{#1}\hrule width\blockwidth height\blockheight depth0pt\endgroup}%
+	\vskip\the\dimexpr-\blockheight-#2-1pt\relax%
 }
 
 \def\blackblock#1#2#3#4{\block{black}{#1}{#2}{#3}{#4}}
