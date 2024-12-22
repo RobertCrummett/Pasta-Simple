@@ -1,13 +1,65 @@
 \input cgem
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Blocks
+\newdimen\blocktop
+\newdimen\blockbottom 
+\newdimen\blockleft
+\newdimen\blockright
 
-%% Background
-\blackblock{0pt}{\frameheight}{0pt}{\framewidth}
-\redblock{0pt}{\frameheight}{\the\dimexpr\framewidth-10cm\relax}{\framewidth}
-\blueblock{0pt}{\frameheight}{0cm}{10cm}
+% Background
+\blocktop=0pt
+\blockbottom=\frameheight
+\blockleft=0pt
+\blockright=\framewidth
+\blackblock{\blocktop}{\blockbottom}{\blockleft}{\blockright}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newdimen\titleheight     \titleheight=12cm
+\newdimen\outerbordersize \outerbordersize=1cm
+\newdimen\outerborderpad  \outerborderpad=1cm
+
+% Left outer border
+\blocktop=\titleheight
+\blockbottom=\the\dimexpr\frameheight-\outerborderpad\relax
+\blockleft=\outerborderpad
+\blockright=\the\dimexpr\outerborderpad+\outerbordersize\relax
+\moredarkgrayblock{\blocktop}{\blockbottom}{\blockleft}{\blockright}
+
+% Right outer border
+\blockleft=\the\dimexpr\framewidth-\outerborderpad-\outerbordersize\relax
+\blockright=\the\dimexpr\framewidth-\outerborderpad\relax
+\moredarkgrayblock{\blocktop}{\blockbottom}{\blockleft}{\blockright}
+
+% Top outer border
+\blockbottom=\the\dimexpr\titleheight+\outerbordersize\relax
+\blockleft=\outerborderpad
+\moredarkgrayblock{\blocktop}{\blockbottom}{\blockleft}{\blockright}
+
+% Bottom outer border
+\blocktop=\the\dimexpr\frameheight-\outerborderpad-\outerbordersize\relax
+\blockbottom=\the\dimexpr\frameheight-\outerborderpad\relax
+\moredarkgrayblock{\blocktop}{\blockbottom}{\blockleft}{\blockright}
+
+%% Logo
+\newdimen\cgemlogoheight       \cgemlogoheight=10cm
+\newdimen\mineslogoheight      \mineslogoheight=12cm
+
+\newdimen\cgemlogotopoffset    \cgemlogotopoffset=1cm
+\newdimen\cgemlogoleftoffset   \cgemlogoleftoffset=1cm
+\newdimen\mineslogotopoffset   \mineslogotopoffset=0cm
+\newdimen\mineslogorightoffset \mineslogorightoffset=0cm
+
+\def\cgemlogo{logo/cgem-logo-dark.png }
+\def\mineslogo{logo/mines-logo-dark.png }
+
+\vskip\cgemlogotopoffset
+\noindent\hskip\cgemlogoleftoffset
+\hbox{\XeTeXpicfile\cgemlogo height\cgemlogoheight}
+\vskip\the\dimexpr-\cgemlogoheight-\cgemlogotopoffset-1pt\relax
+\vskip\mineslogotopoffset
+\noindent\hfill
+\hbox{\XeTeXpicfile\mineslogo height\mineslogoheight}
+\hskip\mineslogorightoffset{}
+\vskip\the\dimexpr-\mineslogoheight-\mineslogotopoffset-1pt\relax
 
 %% Text
 \normalsans
@@ -16,6 +68,5 @@
 \centerline{\largebf An Informative Title}
 \vskip1cm
 \centerline{\largebf With Two Lines!}
-\vfill
 \endgroup % white
-\end
+\bye
